@@ -6,70 +6,66 @@ public class Cliente {
 	private String dataNascimento;
 	private String idade;
 	private String endereco;
-
 	public String getNome() {
 		return nome;
 	}
-	
+	public void setNome(String nome) {
+		this.nome = nome;
+		
+	}
 	public String getCpf() {
 		return cpf;
+		
+	}
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+		
 	}
 	
 	public String getDataNascimento() {
 		return dataNascimento;
+		
+	}
+	
+	public void setDataNascimento(String dataNascimento) {
+		this.dataNascimento = dataNascimento;
+		
 	}
 	
 	public String getIdade() {
-		return dataNascimento;
+		return idade;
+		
 	}
-	
+	public void setIdade(String idade) {
+		this.idade = idade;
+		
+	}
 	public String getEndereco() {
 		return endereco;
-	}	
-	
-	public void setNome(String umNome) {
-		this.nome = umNome;
-		
 	}
 	
-	public void setCpf(String umCpf) {
-		this.cpf = umCpf;
-		
-	}
-	public void setDataNascimento(String umaDataNascimento) {
-		this.dataNascimento = umaDataNascimento;
-		
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 	
-	public void setIdade(String umaIdade) {
-		this.dataNascimento = umaIdade;
+	public boolean validarCPF(String cpf) {
+		cpf = cpf.replaceAll("[^0-9]", "");
+		int numero = 11111111111
 		
-	}
-	
-	public void setEndereco(String umEndereco) {
-		this.nome = umEndereco;
-		
-	}
-	
-	public boolean validaCPF(String Umcpf) {
-		
-		cpf = cpf.replaceAll("`[^0-9]`", "");
-		
-		if (cpf.length() != 11) {
-			return false;
-		}
-		// Verificar se todos os dígitos são iguais. Deixa resto zero na divisão por 11111111111
-		if((Integer.parseInt(cpf) % 11111111111) == 0) {
-			return false;
-			
+		if(cpf.length() != 11) {
+			return false;	
 		}
 		
-		
-		
-		return true;
-				
-		
-		
+		if (Integer.parseInt(cpf) % 11111111111 != 0 ) {
+			return false;
 	}
+		
+		
+		
+	
+	}
+
+
+		
 
 }
