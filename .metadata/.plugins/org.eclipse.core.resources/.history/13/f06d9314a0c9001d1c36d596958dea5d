@@ -1,0 +1,42 @@
+package lab1;
+
+public class Seguradora {
+	private String nome;
+	private String telefone;
+	private String email;
+	private String endereco;
+
+	public String getNome() {
+		return nome;
+	}
+		
+	public String getTelefone() {
+		return telefone;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	
+	public String getendereco() {
+		return endereco;
+	}
+	
+	public void setNome(String umNome) {
+		this.nome = umNome;
+		
+	}
+	
+	public void setTelefone(String umTelefone) {
+		this.nome = umTelefone;
+		
+	}
+	public void setEmail(String umEmail) {
+		this.nome = umEmail;
+		
+	}
+	public void setEndereco(String umEndereco) {
+		this.nome = umEndereco;
+		
+	}
+}
