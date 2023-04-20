@@ -1,14 +1,14 @@
 package com.guedes.lab3;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Cliente {
 	private String nome;
 	private String endereco;
-	private static Veiculo listaVeiculos[];
+	private ArrayList<Veiculo> listaVeiculos;
 	//Init
 	
-	public Cliente(String nome, String endereco, Veiculo[] listaVeiculos){
+	public Cliente(String nome, String endereco, ArrayList listaVeiculos){
 		this.nome = nome;
 		this.endereco = endereco;
 		this.listaVeiculos = listaVeiculos;
@@ -29,6 +29,16 @@ public class Cliente {
 	
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}
+	
+	
+
+	public ArrayList<Veiculo> getListaVeiculos() {
+		return listaVeiculos;
+	}
+
+	public void setListaVeiculos(ArrayList<Veiculo> listaVeiculos) {
+		this.listaVeiculos = listaVeiculos;
 	}
 
 	public String toString(){

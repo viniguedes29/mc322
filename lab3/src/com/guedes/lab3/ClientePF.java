@@ -1,6 +1,7 @@
 package com.guedes.lab3;
-import java.util.Arrays;
-// OK!
+import java.util.ArrayList;
+import java.util.Date;
+
 public class ClientePF extends Cliente{
     private String cpf;
     private String genero;
@@ -9,14 +10,17 @@ public class ClientePF extends Cliente{
     private Date dataNascimento;
     private String classeEconomica;
 
-    public ClientePF(String nome, String endereco, String cpf,  
-					 String genero, Date dataLicenca, String educacao, 
-					 Date dataNascimento, String classeEconomica){
-        super(nome, endereco);
+    public ClientePF(String nome, String endereco, String cpf,  ArrayList listaVeiculo,
+					 String genero,  String educacao, Date dataLicenca, Date dataNascimento,
+					 String classeEconomica){
+        super(nome, endereco, listaVeiculo);
 		this.cpf = cpf;
 		this.genero = genero;
 		this.dataLicenca = dataLicenca;
+		this.dataNascimento = dataNascimento;
 		this.educacao = educacao;
+		this.classeEconomica = classeEconomica;
+		
 
 		int x = 1;
     }
@@ -153,22 +157,33 @@ public class ClientePF extends Cliente{
 	}
 
 		public String toString(){
-			String texto = "Nome: " + "pegar o nome da classe cliente"
+			String texto = "Nome: " + super.getNome()
 			+ "\nCPF: " + this.cpf
-			+ "\nEndereco: " + "pegar o endereco da classe cliente"
-			+ "\nData de Nascimento" + Date.toString(this.dataNascimento)
+			+ "\nEndereco: " + super.getEndereco()
+			+ "\nData de Nascimento: " + this.dataNascimento.toString()
 			+ "\nGenero: " + this.genero
 			+ "\nEscolaridade: " + this.educacao
-			+ "\nClasse Economica: " + this.classeEconomica
-			+ "\nData da liscenca: " + Date.toString(this.dataLicenca)
-			+ "Veículos: " + "pegar a lista de veículos da classe cliente";
+			+ "\nClasse Economica: " + this.classeEconomica.toString()
+			+ "\nData da liscenca: " + this.dataLicenca.toString()
+			+ "\nVeículos: " + super.getListaVeiculos().toString();
 			return texto;
 
 	}
 
-	public static main(){
-		ClientePF cliente1 = new ClientePF("Naruto Uzumai da Sukva", "Konohagakure", 
-		"61313511390", "Masculino", null, null, null, null)
+
+	public static void main(String args[]){
+		Date nascimento = new Date(2002, 10, 5);
+		Date liscensa = new Date(2023, 30, 8);
+		Veiculo veiculo1 = new Veiculo("XYZ3233", "Monza", "Chevrolet", 2000);
+		Veiculo veiculo2 = new Veiculo("XYZ1234", "Rural", "Volksvagem", 1880);
+		ArrayList<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
+		listaVeiculos.add(veiculo1);
+		listaVeiculos.add(veiculo2);
+		ClientePF cliente1 = new ClientePF("Naruto Uzumai da Sukva", "Konohagakure","61313511390",
+				listaVeiculos, "masculino","academia ninja incompleta",
+				nascimento ,liscensa, "muito rico");
+		System.out.println(cliente1.toString());
+		
 	}
 
 }

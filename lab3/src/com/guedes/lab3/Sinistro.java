@@ -6,7 +6,7 @@ public class Sinistro {
     private String sinistro;
     private String endereco;
     private String data;
-    private Segurado seguradora;
+    private Seguradora seguradora;
     private Veiculo veiculo;
     private Cliente cliente;
 

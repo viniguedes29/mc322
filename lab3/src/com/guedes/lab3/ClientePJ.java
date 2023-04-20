@@ -1,13 +1,16 @@
 package com.guedes.lab3;
 import java.util.Arrays;
-
+import java.util.Date;
 public class ClientePJ extends Cliente{
     private String cnpj;
-    private Date dataFuncadacao;
+    private Date dataFundacao;
 
-    public ClientePJ(){
+    public ClientePJ(String nome, String endereco, Veiculo[] listaVeiculo, 
+		   String cnpj, Date dataFundacao){
     // Montar o Init
-    int x= 1;
+    	super(nome, endereco, listaVeiculo);
+    	this.cnpj = cnpj;
+    	this.dataFundacao = dataFundacao;
     }
 
     //Getters e Setters
@@ -31,11 +34,11 @@ public class ClientePJ extends Cliente{
     // Validar o CNPJ
 
     public String toString(){
-        texto = "Nome: " + "pegar nome da classe cliente"
+        String texto = "Nome: " + super.getNome()
         + "\nCNPJ: " + this.cnpj
-        +"\n Data de fundação: " + this.dataFuncadacao
-        +"\nEndereco: " + "pegar endereco na classe cliente"
-        + "\n Veículos: " + "pegar lista de veículos na classe cliente";
+        +"\n Data de fundação: " + this.dataFundacao
+        +"\nEndereco: " + super.getEndereco()
+        + "\n Veículos: " + super.getListaVeiculos().toString();
         
         return texto;
         }
