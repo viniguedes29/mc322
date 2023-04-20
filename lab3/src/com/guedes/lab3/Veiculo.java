@@ -5,7 +5,14 @@ public class Veiculo {
     private String marca;
     private int anoFabricacao;
 
-    
+	public Veiculo(String placa, String modelo, String marca, int anoFabricacao){
+		this.placa = placa;
+		this.modelo = modelo;
+		this.marca = marca;
+		this.anoFabricacao = anoFabricacao;
+	}
+
+    // Getters e Setters
     public int getAnoFabricacao() {
 		return anoFabricacao;
 	}
@@ -37,7 +44,7 @@ public class Veiculo {
         
     	String texto = "Informações do carro:\n" 
         		+ "Marca: " + this.marca  + "\n"
-        		+ "Modelo: " + this.modelo + " ano " + anoFabricacao + "\n"
+        		+ "Modelo: " + this.modelo + " ano " + this.anoFabricacao + "\n"
         		+ "Placa: " + this.placa;
         		 
         
@@ -46,11 +53,8 @@ public class Veiculo {
 
     public static void main(String[] args) {
       // Método main criado para testar e corrigir bugs na classe
-      Veiculo veiculo1 = new Veiculo();
-        veiculo1.setMarca("Chevrolet");
-        veiculo1.setModelo("Monza");
-        veiculo1.setPlaca("CHP1234");
-        veiculo1.setAnoFabricacao(1980);
+      Veiculo veiculo1 = new Veiculo("XYZ3233", "Monza", "Chevrolet", 2000);
+
         System.out.println(veiculo1.toString());
 
 
