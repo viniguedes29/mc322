@@ -120,8 +120,6 @@ public class ClientePF extends Cliente{
 
 		} else{ // Se não for retorna 11 - (resto da soma na divisão por 11)
 			return 11 - soma%11;
-
-
 	    }
 	}
 
