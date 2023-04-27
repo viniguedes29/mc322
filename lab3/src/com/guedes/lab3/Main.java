@@ -1,75 +1,69 @@
 package com.guedes.lab3;
+
+import java.util.Date;
+import java.util.ArrayList;
+
 public class Main{
     public static void main(String[] args) {
-        // Criando um objeto seguradora, que para o contexto desse script será uma única
-        Seguradora seguradora = new Seguradora();
-        seguradora.setNome("Konoha Seguros SA");
-        seguradora.setEmail("sac@konohaseguradora.com");
-        seguradora.setTelefone("85 1234-5678");
-        seguradora.setEndereco("Rua Kyuube, 999, Konohagakure, Pais do Fogo");
-        System.out.println(seguradora.toString());
-
-        // Criando o objeto cliente e preenchendo as variáveis
-        Cliente cliente1 = new Cliente();
-		cliente1.setCpf("226.721.213-80"); //CPF inválido gerado em site da internet
-		cliente1.setDataNascimento("02/03/2001");
-		cliente1.setEndereco("Rua Pitágora, 345, Unicamp, Barao Geraldo");
-		cliente1.setIdade("22");
-		cliente1.setNome("Sasuke Uchiha da Silva");
-		System.out.println(cliente1.toString());
-
-        if(cliente1.validarCPF(cliente1.getCpf())){
-            System.out.println("O CPF digitado e valido.");
-        } else{
-            System.out.println("O CPF " + cliente1.getCpf() + " é invalido, por favor revisar.");
-        }
-
-        // Para esse cliente, vamos criar um veículo
-        Veiculo veiculo1 = new Veiculo();
-        veiculo1.setMarca("Chevrolet");
-        veiculo1.setModelo("Monza");
-        veiculo1.setPlaca("CHP1234");
-        System.out.println(veiculo1.toString());
+        // Iniciando variáveis para rodar o código de forma mais prática
+        // Nomes
+        String nomePF1 = "Naruto Uzumaki Rodrigues";
+        String nomePF2 = "Sasuke Uchiha da Silva";
+        String nomePJ1 = "Akatsuki Nukenins SA";
+        String nomePJ2 = "Alianaça Shinobi LTDA";
+        String nomeSeg1 =  "Konoha Seguros SA";
+        String nomeSeg2 = "Unicamp Seguros SA";
         
-        // Criando um sinistro para o veículo do cliente.
-        Sinistro sinistro1 = new Sinistro();
-        sinistro1.setSinistro("Pegou fogo");
-        sinistro1.setEndereco("Rua da Névoa, 444, Kirigakure, País da Água");
-        System.out.println(sinistro1.toString());
+        // Telefones
+        String telefone1 = "080008000";
+        String telefone2 = "080006000";
         
-        // Formatando um espaçamento entre as saídas
-        System.out.println("\n");
-        System.out.println("__________________");
-        System.out.println("\n");
-
-        // Criando um segundo objeto cliente e preenchendo as variáveis
-        Cliente cliente2 = new Cliente();
-		cliente2.setCpf("156.245.813-27"); //CPF válido gerado em site da internet
-		cliente2.setDataNascimento("02/03/2001");
-		cliente2.setEndereco("Rua Pitágora, 345, Unicamp, Barao Geraldo"); // Mora no mesmo endereço que o cliente 1
-		cliente2.setIdade("22"); // Mesma idade que o cliente 1
-		cliente2.setNome("Naruto Uzumaki Rodrigues");
-		System.out.println(cliente2.toString());
-
-        if(cliente1.validarCPF(cliente2.getCpf())){
-            System.out.println("O CPF digitado e valido.");
-        } else{
-            System.out.println("O CPF " + cliente2.getCpf() + " é invalido, por favor revisar.");
-        }
-
-        // Para esse cliente, vamos criar um veículo
-        Veiculo veiculo2 = new Veiculo();
-        veiculo2.setMarca("BMW");
-        veiculo2.setModelo("X30");
-        veiculo2.setPlaca("HKG0007");
-        System.out.println(veiculo2.toString());
+        // CPFs (gerados com ferramentas da internet
+        String cpf1 = "364.136.217-29";
+        String cpf2 = "297.140.784-55"; //Inválido
+        String cnpj1 = "23.262.618/0001-25";
+        String cnpj2 = "69.268.612/0001-68"; //Inválido
         
-        // Criando um sinistro para o veículo do cliente.
-        Sinistro sinistro2 = new Sinistro();
-        sinistro2.setSinistro("Danificado por raio");
-        sinistro2.setEndereco("Rua A, 888, Kumogakure, País do Relâmpago");
-        System.out.println(sinistro2.toString());
-
+        // Endereços.
+        String endereco1 = "Rua Kyuube, 999, Konohagakure, Pais do Fogo";
+        String endereco2 = "Rua da Névoa, 444, Kirigakure, País da Água";
+        String endereco3 = "Rua Pitágora, 345, Unicamp, Barao Geraldo";
+        String endereco4 = "Rua A, 888, Kumogakure, País do Relâmpago";
+        String endereco5 =  "Rua do Trovão 999, Konogakure, País do fogo";
+        String endereco6 =  "Rua Hichiraku 888, Konogakure, País do fogo";
+        
+        // Datas
+		Date nascimento = new Date(2002, 10, 5);
+		Date licensa = new Date(2023, 30, 8);
+		Date dia_sinistro = new Date(2023, 01,01);
+		
+        // Iniciando veículos
+		Veiculo veiculo1 = new Veiculo("XYZ12345", "Monza", "Chevrolet", 2000);
+		Veiculo veiculo2 = new Veiculo("XYZ3233", "Camaro", "Chevrolet", 2018);
+		Veiculo veiculo3 = new Veiculo("XYZ1234", "Rural", "Volksvagem", 1880);
+		Veiculo veiculo4 = new Veiculo("XYZ1298", "Polo", "Volksvagem", 2023);
+		
+		// Iniciando lista de veículos
+		ArrayList<Veiculo> veiculosCliente1 = new ArrayList<Veiculo>();
+		ArrayList<Veiculo> veiculosCliente2 = new ArrayList<Veiculo>();
+		ArrayList<Veiculo> veiculosCliente3 = new ArrayList<Veiculo>();
+		ArrayList<Veiculo> veiculosCliente4 = new ArrayList<Veiculo>();
+		veiculosCliente1.add(veiculo1);
+		
+		// Lista de clientes
+		ArrayList<Cliente> clientes1 = new ArrayList<Cliente>();
+		ArrayList<Cliente> clientes2 = new ArrayList<Cliente>();
+        
+		//Iniciando clientes
+		Cliente cliente1 = new ClientePF(nomePF1, endereco1, cpf1, veiculosCliente1, "M",
+				"Superior Incompleto", licensa, nascimento, "Muito rico");
+		Cliente cliente2 = new ClientePF(nomePF2, endereco2, cpf2, veiculosCliente2, "M",
+				"Superior Completo", licensa, nascimento, "Muito rico");
+		Cliente cliente3 = new ClientePJ(nomePJ1, endereco3,  veiculosCliente3, cnpj1, nascimento);
+		Cliente cliente4 = new ClientePJ(nomePJ1, endereco4,  veiculosCliente4, cnpj2, nascimento);
+		
+		//Iniciando seguradora
+		Seguradora = new
     
 }
 }

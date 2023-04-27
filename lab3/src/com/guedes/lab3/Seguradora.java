@@ -72,6 +72,32 @@ public class Seguradora {
     }
 
     // Adicionando Cliente
+    public boolean cadastraClientePF(ClientePF cliente) {
+    	String cpf = cliente.getCpf();
+    	if(cliente.validarCPF(cpf)){
+            //Se o CPF é válido, adiciona o Cliente à lista e retorna true.
+            listaCliente.add(cliente);
+            return true;              
+            
+        } else{
+            // Se o CPF for inválido, retorta true e volta False.
+            return false;
+        }
+    	
+    }
+    
+    public boolean cadastraClientePJ(ClientePJ cliente) {
+    	String cnpj = cliente.getCnpj();
+        if(cliente.validarCNPJ(cnpj)){
+        	// Se o CNPJ é valorido, cadastra
+            listaCliente.add(cliente);
+            return true;
+            
+        } else{
+            return false;
+        }
+        }
+
     public boolean cadastraCliente(Cliente cliente){
         /* Função que verifica de pode adicionar se pode adicionar um cliente à listaCliente da seguradora 
          * Se puder adicionar, ele adiciona e retorna true
@@ -81,37 +107,16 @@ public class Seguradora {
         if(listaCliente.contains(cliente)){
             return false;
     
-        //É necessário verificar se o Cliente é do tipo ClintePF e ClientePJ
+        //É necessário verificar se o Cliente é do tipo ClintePF e ClientePJ. Após verificar, chama o método de cadastro do respectivo cliente
         } else if (cliente instanceof ClientePF){
-            // Verifica se a instância é da classe ClientePF, se for, pega-se o CPF
-            String cpf = ((ClientePF) cliente).getCpf();
-            if(((ClientePF) cliente).validarCPF(cpf)){
-                System.out.println("PF");
-                //Se o CPF é válido, adiciona o Cliente à lista e retorna true.
-                listaCliente.add(cliente);
-                System.out.println("Cadastrou");
-                return true;              
-                
-            } else{
-                // Se o CPF for inválido, retorta true e volta False.
-                System.out.println("CPF Inválido");
-                return false;
-            }
+            return cadastraClientePF((ClientePF) cliente);
             
         } else if ((cliente instanceof ClientePJ)){
-            //Analogamente ao fluxo de de PF, para validar e adicionar
-            String cnpj = ((ClientePJ) cliente).getCnpj();
-            if(((ClientePF) cliente).validarCPF(cnpj)){
-                listaCliente.add(cliente);
-                return true;
-                
-            } else{
-                return false;
-            }
+        	return cadastraClientePJ((ClientePJ) cliente);
+        	
         } else{
         // Para o caso que ele não está adicionado na lista, não ser uma instância PF ou PJ
         // Nesse caso considerie que não se deve adicionar
-            System.out.println("Final");
             return false;
         }
     }

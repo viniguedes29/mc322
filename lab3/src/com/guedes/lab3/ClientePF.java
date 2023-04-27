@@ -10,7 +10,7 @@ public class ClientePF extends Cliente{
     private Date dataNascimento;
     private String classeEconomica;
 
-    public ClientePF(String nome, String endereco, String cpf,  ArrayList listaVeiculo,
+    public ClientePF(String nome, String endereco, String cpf,  ArrayList<Veiculo> listaVeiculo,
 					 String genero,  String educacao, Date dataLicenca, Date dataNascimento,
 					 String classeEconomica){
         super(nome, endereco, listaVeiculo);
@@ -22,7 +22,7 @@ public class ClientePF extends Cliente{
 		this.classeEconomica = classeEconomica;
 		
 
-		int x = 1;
+	
     }
 
     // Getters e Setters
