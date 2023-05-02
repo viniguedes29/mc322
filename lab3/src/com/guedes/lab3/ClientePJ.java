@@ -32,7 +32,7 @@ public class ClientePJ extends Cliente{
     }
 
     // Validar o CNPJ
-    public int calcula_soma_d1(String cnpj){
+    public static int calcula_soma_d1(String cnpj){
         // Calcula a soma para definir o primeiro dígito verificador.
         // Esse método é invocado depois de o cnpj ter garantidamente 14 dígitos numéricos    
 
@@ -47,7 +47,7 @@ public class ClientePJ extends Cliente{
     }
 
 
-    public int calcula_soma_d2(String cnpj){
+    public static int calcula_soma_d2(String cnpj){
         // Calcula a soma para definir o segundo dígito verificador.
         // Esse método é invocado depois de o cnpj ter garantidamente 14 dígitos numéricos    
 
@@ -64,7 +64,7 @@ public class ClientePJ extends Cliente{
         return soma;
     }
 
-    public int calcula_digito_verificador(int soma){
+    public static int calcula_digito_verificador(int soma){
         /* Pega a soma dos dígitos ponderados pelo fator multiplicativo e verifica o resto por 11.
          * A depender do valor, retorna o dígito
          * Essa regra serve para calcular os dois dígitos verificadores
@@ -79,7 +79,7 @@ public class ClientePJ extends Cliente{
     }
     
     
-    public boolean validarCNPJ(String cnpj) {
+    public static boolean validarCNPJ(String cnpj) {
         /* Utiliza os métodos anteirores para fazer a validação do CNPJ.
 		 */
 		cnpj = cnpj.replaceAll("[^0-9]", "");// Substitui todos os caracteres não numéricos por um vazio

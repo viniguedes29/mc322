@@ -14,7 +14,7 @@ public class Sinistro {
     }
   
       public Sinistro(String sinistro, String endereco, String data, 
-                      Seguradora seguradora, Veiculo veiculo, ClientePF cliente){
+                      Seguradora seguradora, Veiculo veiculo, Cliente cliente){
         
         this.endereco = endereco;
         this.sinistro = sinistro;
@@ -23,17 +23,6 @@ public class Sinistro {
         this.veiculo = veiculo;
         this.cliente = cliente;
       }
-  
-      public Sinistro(String sinistro, String endereco, String data, 
-                      Seguradora seguradora, Veiculo veiculo, ClientePJ cliente){
-        
-        this.endereco = endereco;
-        this.sinistro = sinistro;
-        this.data = data;
-        this.seguradora = seguradora;
-        this.veiculo = veiculo;
-        this.cliente = cliente;
-                      }
 
   // Getters e Setters
   public String getData() {

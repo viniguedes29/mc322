@@ -32,7 +32,7 @@ public class ClientePF extends Cliente{
     }
 
     public void setCpf(String cpf) {
-        this.cpf = cpf;
+        this.cpf = cpf.replaceAll("[^0-9]", ""); // Deixando o cpf com apenas números.
     }
 
     public String getGenero() {
@@ -77,7 +77,7 @@ public class ClientePF extends Cliente{
 
     // Funções para validação do CPF.
 
-	public int somaPrimeiroDigitoVerificadorCPF(String cpf) {
+	static int somaPrimeiroDigitoVerificadorCPF(String cpf) {
 		/* Para calcular a o primeiro dígito verificador, é necessário pegar a soma do 9 primeiros dígitos. Essa função
 		realiza essa soma.
 		Para tanto, ela recebe como parâmetro a string cpf, que teve seus caracteres especiais retirados e passou pela vericação de 11 dígitos
@@ -92,7 +92,7 @@ public class ClientePF extends Cliente{
 		
 	}
 	
-	public int somaSegundoDigitoVerificadorCPF(String cpf) {
+	static int somaSegundoDigitoVerificadorCPF(String cpf) {
 		/* Para fazer a verificação do CPF com o primeiro dígito verificador, é necessário pegar a soma do segundo ao nono dígito e usar o primeiro verificador calculado.
 		Essa função realiza essa soma. São utilizadas dois métodos diferentes para cálcular as somas dos dígitos verificadores, pois usam funções diferentes.
 		Para tanto, ela recebe como parâmetro a string cpf, que teve seus caracteres não numéricos retirados e passou pela vericação de 11 dígitos
@@ -109,7 +109,7 @@ public class ClientePF extends Cliente{
 		
 	}
 
-	public int calculaDigitoVerificadorCPF(int soma){
+	static int calculaDigitoVerificadorCPF(int soma){
 		/*  O Dígito verificador está relacionado com as somas calculadas nos dois métodos anteriores e o seu resto na divisão por 11, 
 		 	conforme descrita
 		*/
@@ -123,7 +123,7 @@ public class ClientePF extends Cliente{
 	    }
 	}
 
-	public boolean validarCPF(String cpf) {
+	static boolean validarCPF(String cpf) {
         /* Utiliza os métodos anteirores para fazer a validação do CPF.
 		 */
 		cpf = cpf.replaceAll("[^0-9]", "");// Substitui todos os digitos não numéricos por um digito vazio
