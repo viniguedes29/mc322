@@ -1,3 +1,1 @@
 INDEX VERSION 1.131
-file:/home/ec2022/ra260440/repositoriodovini/mc322/.metadata/.plugins/org.eclipse.jdt.core/1865797976.index
-meta_index
