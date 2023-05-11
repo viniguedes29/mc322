@@ -12,6 +12,7 @@ public class ClientePF extends Cliente{
     private LocalDate dataNascimento;
     private String classeEconomica;
 
+
     public ClientePF(String nome, String endereco, String cpf,  ArrayList<Veiculo> listaVeiculo,
 					 String genero,  String educacao, Date dataLicenca, LocalDate dataNascimento,
 					 String classeEconomica){
@@ -22,7 +23,6 @@ public class ClientePF extends Cliente{
 		this.dataNascimento = dataNascimento;
 		this.educacao = educacao;
 		this.classeEconomica = classeEconomica;
-		
 
 	
     }
@@ -156,11 +156,19 @@ public class ClientePF extends Cliente{
 		}
 		}
 	// Calculo de Score.
-	public long calculaIdade() {
+	public int calculaIdade() {
 		LocalDate hoje = LocalDate.now();
 		long idade = dataNascimento.until(hoje, ChronoUnit.YEARS);
-		return idade;
+		return (int) idade;
 	}
+	 public double calulaScore() {
+		 int idade = calculaIdade();
+		 double fatorIdade = CalcSeguro.getFatorIdade(idade);
+		 double valorBase = CalcSeguro.VALOR_BASE.getValor();
+		 int quantidadeCarros = super.getListaVeiculos().size();
+		 
+		 return fatorIdade*valorBase*quantidadeCarros;
+	 }
 	
 	
 	

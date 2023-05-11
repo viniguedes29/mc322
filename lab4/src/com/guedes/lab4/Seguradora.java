@@ -109,6 +109,9 @@ public class Seguradora {
          * Se não puder ele retorna false.
          * O critério de adição é adionar 
         */
+    	
+    	// VERIFICAR A IDADE E TUDO QUE PODE GERAR UM CLIENTE INVÁLIDO
+    	
         if(listaCliente.contains(cliente)){
             return false;
     

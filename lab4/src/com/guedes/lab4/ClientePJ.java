@@ -4,13 +4,15 @@ import java.util.Date;
 public class ClientePJ extends Cliente{
     private String cnpj;
     private Date dataFundacao;
+    private int qtdeFuncionarios;
 
-    public ClientePJ(String nome, String endereco, ArrayList listaVeiculo, 
-		   String cnpj, Date dataFundacao){
+    public ClientePJ(String nome, String endereco, ArrayList<Veiculo> listaVeiculo, 
+		   String cnpj, Date dataFundacao, int qtdeFuncionarios){
     // Montar o Init
     	super(nome, endereco, listaVeiculo);
     	this.cnpj = cnpj;
     	this.dataFundacao = dataFundacao;
+    	this.qtdeFuncionarios = qtdeFuncionarios;
     }
 
     //Getters e Setters
@@ -111,7 +113,16 @@ public class ClientePJ extends Cliente{
         }
 		                }
 
-
+    
+    // Calcula score.
+    public double calculaScore() {
+		
+    	int quantidadeCarros = super.getListaVeiculos().size();
+		double valorBase = CalcSeguro.VALOR_BASE.getValor();
+		
+		return valorBase*quantidadeCarros*qtdeFuncionarios;
+    }
+    
     public String toString(){
         String texto = "Nome: " + super.getNome()
         + "\nCNPJ: " + this.cnpj
@@ -127,7 +138,7 @@ public class ClientePJ extends Cliente{
         Date fundacao = new Date(2023, 30, 8);
         ArrayList<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
         ClientePJ cliente1 = new ClientePJ("Sasuke Uchiha de Sousa", "Konohagakure", 
-                                           listaVeiculos , "98.987.883/0001-70", fundacao);
+                                           listaVeiculos , "98.987.883/0001-70", fundacao, 30);
         System.out.println(cliente1.validarCNPJ(cliente1.getCnpj()));
         System.out.println(cliente1.toString());
 

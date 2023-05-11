@@ -5,6 +5,7 @@ public class Cliente {
 	private String nome;
 	private String endereco;
 	private ArrayList<Veiculo> listaVeiculos;
+	double valorSeguro;
 	//Init
 	
 	public Cliente(String nome, String endereco, ArrayList<Veiculo> listaVeiculos){
@@ -47,9 +48,10 @@ public class Cliente {
 		
 		return texto;
 	}
+	
 	// Calculo de Score
 	
-	public int calculaScore() {
+	public double calculaScore() {
 		/* Método que calcula o Score,.
 		 * O objeto de Cliente não deve ter um score, sem um ClientePF ou ClientePJ*/
 		return 0;
