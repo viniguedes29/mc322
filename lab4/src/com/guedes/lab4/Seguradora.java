@@ -1,7 +1,10 @@
 package com.guedes.lab4;
 
+import java.security.Identity;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 public class Seguradora {
 	private String nome;
@@ -82,6 +85,8 @@ public class Seguradora {
     	if(ClientePF.validarCPF(cpf)){ // Dúvida: O VSCode reclamou que eu chamei um método estático dentro de um não estático
             //Se o CPF é válido, adiciona o Cliente à lista e retorna true.
             listaCliente.add(cliente);
+            // Ao cadastrar o cliente, calcula o valor do seguro
+            calcularPrecoSeguroCliente(cliente);
             return true;              
             
         } else{
@@ -96,6 +101,8 @@ public class Seguradora {
         if(ClientePJ.validarCNPJ(cnpj)){
         	// Se o CNPJ é valorido, cadastra
             listaCliente.add(cliente);
+            // Ao cadastrar o cliente, calcula o valor do seguro
+            calcularPrecoSeguroCliente(cliente);
             return true;
             
         } else{
@@ -141,6 +148,8 @@ public class Seguradora {
             if(sinistro.verificaVeiculo(veiculo)){
                 // Se o veículo pertence ao cliente, adicionamos o sinistro à lista de sinistros
                 this.listaSinistro.add(sinistro);
+                // Se o sinistro for registrado, atualiza-se o valor do seguro do cliente
+                calcularPrecoSeguroCliente(cliente);
             return true;
             } else {
                 // Se o veículo não for do cliente, não adiciona.
@@ -172,36 +181,59 @@ public class Seguradora {
 
             }
 
+            // Seta o valor do seguro.
+            calcularPrecoSeguroCliente(cliente);
+
         } 
-        
-        public boolean removeCliente(String identificador){
-        // Recebe um CPF ou um CNPJ e verifica se há algum cliente com essa informação. 
-        // Haverá um fluxo para o cado de ser um cliente PF e um cliente PJ. Iniciamos verificando o Identificador
-        if(ClientePJ.validarCNPJ(identificador)){
-            // Se for um CNPJ válido, busca-se por um cliente PJ com esse identificador na lista cliente para remove-lo
-        for(Cliente cliente: listaCliente){
-            if(((ClientePJ) cliente).getCnpj() == identificador){
-                removeSinistroCliente(cliente);
-                // Remove todos os sinistros desse cliente
-                listaCliente.remove(cliente);
-                return true; // Retorna True, indicando sucesso
-            }
-        }
-        } else if(ClientePF.validarCPF(identificador)){
-            // Funciona de forma análoga às primeiras verificações
+
+        private void removerClientePF(String cpf){
+            // Percorre a lista de clientes e retira o que tem CPF passado
             for(Cliente cliente: listaCliente){
-                if(((ClientePF) cliente).getCpf() == identificador){
-                    removeSinistroCliente(cliente);
+                if(((ClientePF) cliente).getCpf() == cpf){
                     listaCliente.remove(cliente);
-                    return true;
                 }
             }
+        }
+        
+        public boolean removerCliente(String identificador){
+            /* Função remove um cliente da seguradora
+             * Se o cliente estiver na seguradora, ele é removido e retorna true 
+             */
+            for(Cliente cliente: listaCliente){
+                if(cliente instanceof ClientePF){
+                    ClientePF c1 = (ClientePF) cliente;
+                    if (c1.getCpf() == identificador){
+                        removerClientePF(identificador);
+
+                    }
+                }
+            }
+            if(! listaCliente.contains(cliente)){
+                // Se o cliente está na seguradora, não remove    
+                return false;
+            } else{
+                // Se está na lista, remove os sinsitros (atualizando o valor do seguro), remove da lista e atualiza o valor do seguro.
+                removeSinistroCliente(cliente);
+                listaCliente.remove(cliente);
+                calcularPrecoSeguroCliente(cliente);
+                return true;
+            }
+        }
+
+    /*Cadastra um novo veículo para o cliente -> Feito na classe seguradora, pois ao adicionar um novo cliente
+     * é necessário calcular novamente o preço do seguro */
+    public boolean cadastraVeiculo(Veiculo veiculo, Cliente cliente){
+        // Se o veiculo já está na lista, adiciona e retorna true, se não retorna false
+        if(!cliente.getListaVeiculos().contains(veiculo)){
+            //Adiciona
+            cliente.getListaVeiculos().add(veiculo);
+            calcularPrecoSeguroCliente(cliente);
+            return true;
         } else{
-            return false; // Se o CPF e o CNPJ é inváido, não é possível remover.
+            return false;
         }
-        return false; // Se saiu dessa estrutura condicional sem retornar nada, não removeu nenhum cliente.
-    
-        }
+        
+    }
 
     // Vizualisar o Sinistro de um cliente
 
@@ -251,7 +283,7 @@ public class Seguradora {
                 sinistro.getSinistro() + ", Veiculo: " + sinistro.getVeiculo().getMarca() + 
                 ", " + sinistro.getVeiculo().getModelo() + ", " + sinistro.getVeiculo().getAnoFabricacao());
             }
-            }
+        }
 
         return lista_auxiliar;
     }
@@ -325,6 +357,104 @@ public class Seguradora {
 
     }
 
+    // Calulando o valor do seguro de um cliente
+    public void cadastrarClientePFTerminal(){
+        Scanner entrada = new Scanner(System.in);
+        // Recebe os dados
+        String nome, endereco, cpf, genero, educacao, classeEconomica;
+        int diaNascimento, mesNascimento, anoNascimento, diaLicensa, mesLicensa, anoLicensa;
+        LocalDate dataNascimento, dataLiscensa;
+        ArrayList<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
+        Cliente cliente;
+
+        // Recebendo o parâmetro
+        System.out.print("Digite o nome do cliente: ");
+        nome = entrada.nextLine();
+        System.out.print("Digite o endereco: ");
+        endereco = entrada.nextLine();
+        System.out.print("Digite o genero: ");
+        genero = entrada.nextLine();
+        System.out.print("Digite o educacao: ");
+        educacao = entrada.nextLine();
+        System.out.print("Digite a classe economica: ");
+        classeEconomica = entrada.nextLine();
+        System.out.print("Digite o CPF: ");
+        cpf = entrada.nextLine();
+        System.out.print("Digite o dia do nascimento: ");
+        diaNascimento = entrada.nextInt();
+        System.out.print("Digite o mes do nascimento: ");
+        mesNascimento = entrada.nextInt();
+        System.out.print("Digite o ano do nascimento: ");
+        anoNascimento = entrada.nextInt();
+        System.out.print("Digite o dia da assinatura da liscensa: ");
+        diaLicensa = entrada.nextInt();
+        System.out.print("Digite o mês da assinatura da liscensa: ");
+        mesLicensa = entrada.nextInt();
+        System.out.print("Digite o ano da assinatura da liscensa: ");
+        anoLicensa = entrada.nextInt();
+        dataNascimento = LocalDate.of(anoNascimento, mesNascimento, diaNascimento);
+        dataLiscensa = LocalDate.of(anoLicensa, mesLicensa, diaLicensa);
+        
+        while(!Validacao.validaNome(nome)){
+            System.out.print("Nome com caracteres especiais, corrija e digite novamente: ");
+            nome = entrada.nextLine();
+        }
+
+        while(!Validacao.validaCPF(cpf)){
+            System.out.print("CPF inválido, digite novamente: ");
+            cpf = entrada.nextLine();
+        }
+
+        cliente = new ClientePF(nome, endereco, cpf, listaVeiculos,genero, 
+                                educacao, dataLiscensa, dataNascimento, classeEconomica);
+        calcularPrecoSeguroCliente(cliente);
+        listaCliente.add(cliente);
+
+
+    }
+
+    //Calculando o valor do seguro
+
+    public int numeroSinistroCliente(Cliente cliente){
+        //Função retorno o número de sinsitros do cliente na seguradora
+        // Percorre a lista de clientes e retorna o número de clientes e alterar o contador
+        // Não verifica se o cliente está cadastrado, pois um cliente fora da seguradora tem um valor default
+        int contador = 0; 
+        for(Sinistro sinistro: listaSinistro){
+            if (sinistro.getCliente() == cliente){
+                contador++;
+            }
+        }
+        return contador;
+    }
+
+    public void calcularPrecoSeguroCliente(Cliente cliente){
+        // Calcula o valor do seguro para UM cliente, a partir do número de sinistros e do score.
+        // Atualiza o valor da variável precoSeguro do objeto cliente e retorna o valor
+        int numero_sinistro = numeroSinistroCliente(cliente); 
+        double score = cliente.calculaScore();
+        cliente.setValorSeguro(score*(1+numero_sinistro));
+    }
+
+    public void calcularPrecoSeguroCliente(){
+        // Calcula o valor do seguro para TODOS os clientes na seguradora, a partir do método sobrecarregado
+        for (Sinistro sinistro: listaSinistro){
+            Cliente cliente = sinistro.getCliente();
+            calcularPrecoSeguroCliente(cliente);
+        }
+    }
+
+    // Calculando a receita
+    public double calcularReceita(){
+        double receita = 0;
+        for (Cliente cliente: listaCliente){
+            receita += cliente.getValorSeguro();
+        }
+        return receita;
+    }
+
+    // Cadastro a partir de input de dados
+
     
     public String toString(){
 		String texto = "Segurado: " + this.nome +
@@ -337,11 +467,6 @@ public class Seguradora {
                 
 		return texto;
 	}
-
-	
-
-
-
 	public static void main(String[] args){
 		// Método main para retirar bugs da classe. Por favor, desconsiderar na correção.
 		Veiculo veiculo1 = new Veiculo("XYZ3233", "Monza", "Chevrolet", 2000);
@@ -349,37 +474,16 @@ public class Seguradora {
 		ArrayList<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
 		listaVeiculos.add(veiculo1);
 		listaVeiculos.add(veiculo2);
-		ClientePF cliente1 = new ClientePF("Naruto Uzumai da Sukva", "Konohagakure","61313511390",
-				listaVeiculos, "masculino","academia ninja incompleta",
-				data1 ,data2, "muito rico");
 		ArrayList<Cliente> listaCliente1 = new ArrayList<Cliente>();
         ArrayList<Sinistro> listaSinistro1 = new ArrayList<Sinistro>();
         Seguradora seguradora = new Seguradora("Segura Peao", "0800", "seguuuurapeao@segura.com", 
         "Rua Pitágoras, 345", listaSinistro1, listaCliente1);
-        if (seguradora.cadastraCliente(cliente1)){
-            System.out.println("Cadastrado com sucesso");
-        
-        }else{
-            System.out.println("Erro ao cadastrar");
-        };
-        Sinistro sinistro = new Sinistro("pegou fogo", "Konoga", "15/10/22", 
-                    seguradora, veiculo1, cliente1);
-        if(seguradora.gerarSinistro(sinistro)){
-            System.out.println("Sinistro cadastrado");
-        } else{
-            System.out.println("Não cadastrado");
-        }
-        System.out.println(seguradora.getListaCliente());
-        System.out.println(seguradora.getListaSinistro());
-        seguradora.listarSinistro("PF");
-        seguradora.listarSinistro("PJ");
-        System.out.println(seguradora.toString());
-        if(seguradora.removeCliente(cliente1.getCpf())){
-            System.out.println("Removido com sucesso");
-        }else{
-            System.out.println("Não removido com sucesso");}
+        seguradora.cadastrarClientePFTerminal();
+        seguradora.getListaCliente().toString();
+        seguradora.listarCliente("PF");
 
-        System.out.println(seguradora.toString());
+        
+
 	}
 
 }

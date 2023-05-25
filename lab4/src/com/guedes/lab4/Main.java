@@ -1,5 +1,6 @@
 package com.guedes.lab4;
 import java.util.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Main{
@@ -42,9 +43,9 @@ public class Main{
         String endereco6 =  "Rua Hichiraku 888, Konogakure, País do fogo";
         
         // Datas
-		Date nascimento = new Date(2002, 10, 5);
-		Date licensa = new Date(2023, 30, 8);
-		Date dia_sinistro = new Date(2023, 01,01);
+		LocalDate nascimento = LocalDate.of(2002, 10, 5);
+		LocalDate licensa = LocalDate.of(2023, 30, 8);
+		Date fundacao = new Date(2023, 01,01);
 		
         // Iniciando veículos
 		Veiculo veiculo1 = new Veiculo("XYZ12345", "Monza", "Chevrolet", 2000);
@@ -72,8 +73,8 @@ public class Main{
 				"Superior Incompleto", licensa, nascimento, "Muito rico");
 		ClientePF cliente2 = new ClientePF(nomePF2, endereco2, cpf2, veiculosCliente2, "M",
 				"Superior Completo", licensa, nascimento, "Muito rico");
-		ClientePJ cliente3 = new ClientePJ(nomePJ1, endereco3,  veiculosCliente3, cnpj1, nascimento);
-		ClientePJ cliente4 = new ClientePJ(nomePJ2, endereco4,  veiculosCliente4, cnpj2, nascimento);
+		ClientePJ cliente3 = new ClientePJ(nomePJ1, endereco3,  veiculosCliente3, cnpj1, fundacao, 10);
+		ClientePJ cliente4 = new ClientePJ(nomePJ2, endereco4,  veiculosCliente4, cnpj2, fundacao, 20);
         System.out.println("Verificando o cliente1: ");
         System.out.println(cliente1);
 		

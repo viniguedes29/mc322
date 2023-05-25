@@ -7,14 +7,14 @@ import java.time.temporal.ChronoUnit;
 public class ClientePF extends Cliente{
     private String cpf;
     private String genero;
-    private Date dataLicenca;
+    private LocalDate dataLicenca;
     private String educacao;
     private LocalDate dataNascimento;
     private String classeEconomica;
 
 
     public ClientePF(String nome, String endereco, String cpf,  ArrayList<Veiculo> listaVeiculo,
-					 String genero,  String educacao, Date dataLicenca, LocalDate dataNascimento,
+					 String genero,  String educacao, LocalDate dataLicenca, LocalDate dataNascimento,
 					 String classeEconomica){
         super(nome, endereco, listaVeiculo);
 		this.cpf = cpf;
@@ -45,11 +45,11 @@ public class ClientePF extends Cliente{
         this.genero = genero;
     }
 
-    public Date getDataLicenca() {
+    public LocalDate getDataLicenca() {
         return dataLicenca;
     }
 
-    public void setDataLicenca(Date dataLicenca) {
+    public void setDataLicenca(LocalDate dataLicenca) {
         this.dataLicenca = dataLicenca;
     }
 
@@ -161,7 +161,7 @@ public class ClientePF extends Cliente{
 		long idade = dataNascimento.until(hoje, ChronoUnit.YEARS);
 		return (int) idade;
 	}
-	 public double calulaScore() {
+	 public double calculaScore() {
 		 int idade = calculaIdade();
 		 double fatorIdade = CalcSeguro.getFatorIdade(idade);
 		 double valorBase = CalcSeguro.VALOR_BASE.getValor();
@@ -169,8 +169,6 @@ public class ClientePF extends Cliente{
 		 
 		 return fatorIdade*valorBase*quantidadeCarros;
 	 }
-	
-	
 	
 
 	
@@ -191,7 +189,7 @@ public class ClientePF extends Cliente{
 
 	public static void main(String args[]){
 		LocalDate nascimento =  LocalDate.of(2005, 11, 2);
-		Date liscensa = new Date(2023, 30, 8);
+		LocalDate liscensa = LocalDate.of(2003, 2, 15);
 		Veiculo veiculo1 = new Veiculo("XYZ3233", "Monza", "Chevrolet", 2000);
 		Veiculo veiculo2 = new Veiculo("XYZ1234", "Rural", "Volksvagem", 1880);
 		ArrayList<Veiculo> listaVeiculos = new ArrayList<Veiculo>();

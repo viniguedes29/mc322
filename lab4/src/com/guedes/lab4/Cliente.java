@@ -1,11 +1,12 @@
 package com.guedes.lab4;
 import java.util.ArrayList;
 
-public class Cliente {
+public abstract class Cliente {
 	private String nome;
 	private String endereco;
 	private ArrayList<Veiculo> listaVeiculos;
 	double valorSeguro;
+
 	//Init
 	
 	public Cliente(String nome, String endereco, ArrayList<Veiculo> listaVeiculos){
@@ -22,6 +23,14 @@ public class Cliente {
 		this.nome = nome;
 		
 	}
+
+	public double getValorSeguro() {
+		return valorSeguro;
+	}
+	public void setValorSeguro(double valorSeguro) {
+		this.valorSeguro = valorSeguro;
+		
+	}
 		
 	public String getEndereco() {
 		return endereco;
@@ -31,8 +40,6 @@ public class Cliente {
 		this.endereco = endereco;
 	}
 	
-	
-
 	public ArrayList<Veiculo> getListaVeiculos() {
 		return listaVeiculos;
 	}
@@ -48,14 +55,17 @@ public class Cliente {
 		
 		return texto;
 	}
+
+	// Adicionando veículo
+	public void adiciona_Veiculo(Veiculo veiculo){
+		// Adicona um veículo na lista de veículos de um cliente.
+		
+	}
 	
 	// Calculo de Score
 	
-	public double calculaScore() {
-		/* Método que calcula o Score,.
-		 * O objeto de Cliente não deve ter um score, sem um ClientePF ou ClientePJ*/
-		return 0;
-	}
+	public abstract double calculaScore();
+
 	
 	
 
@@ -63,7 +73,7 @@ public class Cliente {
 		// Função main utilizada para validar os métodos criados.
 		ArrayList<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
 		//listaVeiculos.add(veiculo1);
-		Cliente cliente1 = new Cliente("Naruto Uzumaki", "Rua do Trovão, Konogakure, País do fogo", listaVeiculos);
-		System.out.println(cliente1.toString());
+		//Cliente cliente1 = new Cliente("Naruto Uzumaki", "Rua do Trovão, Konogakure, País do fogo", listaVeiculos);
+		//System.out.println(cliente1.toString());
 	}
 }

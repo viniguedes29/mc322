@@ -111,16 +111,16 @@ public class ClientePJ extends Cliente{
 		} else{
 			return false;
         }
-		                }
+		}
 
     
-    // Calcula score.
+    // Calculo do score.
     public double calculaScore() {
 		
     	int quantidadeCarros = super.getListaVeiculos().size();
 		double valorBase = CalcSeguro.VALOR_BASE.getValor();
 		
-		return valorBase*quantidadeCarros*qtdeFuncionarios;
+		return valorBase*quantidadeCarros*(1 + qtdeFuncionarios/100);
     }
     
     public String toString(){
